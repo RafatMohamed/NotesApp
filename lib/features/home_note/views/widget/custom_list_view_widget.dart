@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../../../core/helper/my_navigator_app.dart';
-import '../../../add_note/views/add_note_view.dart';
+import '../../../edite_note/views/edit_note_view.dart';
 
 class CustomListViewWidget extends StatelessWidget {
   const CustomListViewWidget({super.key});
@@ -26,10 +25,10 @@ class CustomListViewWidget extends StatelessWidget {
               ),
             ),
             subtitle:const Padding(
-              padding: const EdgeInsetsDirectional.only(
+              padding:  EdgeInsetsDirectional.only(
                   start: 2
               ),
-              child: const Text(
+              child:  Text(
                 "Build your career with Raafat Mohamed",
                 style: TextStyle(
                   fontSize: 18,

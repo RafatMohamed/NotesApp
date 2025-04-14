@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_proj/core/resources/app_color.dart';
 class TextFormFieldApp extends StatefulWidget {
   const TextFormFieldApp({
     super.key,
@@ -13,13 +14,11 @@ class TextFormFieldApp extends StatefulWidget {
     required this.hintText,
     this.hintFontWeight = FontWeight.w200,
     this.hintFontSize =14,
-   required this.hintColor ,
     this.hintFontStyle = FontStyle.normal,
     this.hintTextAlign = TextAlign.start,
     this.radius =15,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.done,
-    required this.borderDecorationColor,
     this.validator,
     required this.onFieldSubmitted,
     this.focusNode,
@@ -29,11 +28,9 @@ class TextFormFieldApp extends StatefulWidget {
 
   final bool iconSuffix;
   final int maxLine;
-  final Color borderDecorationColor;
   final String hintText;
   final FontWeight hintFontWeight;
   final double hintFontSize;
-  final Color hintColor;
   final FontStyle? hintFontStyle;
   final TextAlign? hintTextAlign;
   final String labelText;
@@ -57,17 +54,7 @@ class TextFormFieldApp extends StatefulWidget {
 
 
 class _TextFormFieldAppState extends State<TextFormFieldApp> {
-  bool _isFieldFilled = false;
 
-  @override
-  void initState() {
-    super.initState();
-    widget.controller.addListener(() {
-      setState(() {
-        _isFieldFilled = widget.controller.text.isNotEmpty;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +63,7 @@ class _TextFormFieldAppState extends State<TextFormFieldApp> {
         color: Colors.transparent, // Keep background white
         borderRadius: BorderRadius.circular(widget.radius),
         border: Border.all(
-          color:
-              _isFieldFilled
-                  ? widget.borderDecorationColor
-                  : Colors.white, // Change border color dynamically
+          color: AppColor(context).whiteColor,
           width: 2,
         ),
       ),
@@ -119,7 +103,7 @@ class _TextFormFieldAppState extends State<TextFormFieldApp> {
           ),
           hintText: widget.hintText,
           hintStyle: TextStyle(
-            color: widget.hintColor,
+            color: AppColor(context).whiteColor,
             fontSize: widget.hintFontSize,
             fontWeight: widget.hintFontWeight,
           ),
@@ -129,8 +113,7 @@ class _TextFormFieldAppState extends State<TextFormFieldApp> {
         textInputAction: widget.textInputAction,
         textAlign: TextAlign.start,
         style: TextStyle(
-          color: widget.hintColor,
-          fontSize: widget.hintFontSize,
+          fontSize: 18,
           fontWeight: widget.hintFontWeight,
         ),
       ),

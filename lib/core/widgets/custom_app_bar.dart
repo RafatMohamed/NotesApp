@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_proj/core/resources/app_color.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key,required this.text, required this.iconButton, required this.onPress});
@@ -18,7 +19,7 @@ class CustomAppBar extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            color: Colors.grey.shade900.withValues(alpha: 1.3),
+            color: AppColor(context).blackColor.withValues(alpha: 1),
             borderRadius: BorderRadius.circular(5),
           ),
           child: IconButton(

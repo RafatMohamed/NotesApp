@@ -13,7 +13,7 @@ static void navigatorPushGo({required BuildContext context ,required Widget navi
   Get.to(
         () => navigatorToPage,
     duration:const Duration(seconds: 1),
-    transition: Transition.native,
+    transition: Transition.fadeIn,
   );
 }
 
