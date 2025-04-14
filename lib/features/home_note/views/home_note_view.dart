@@ -4,7 +4,7 @@ import '../../../core/widgets/custom_app_bar.dart';
 import '../../add_note/views/add_note_view.dart';
 
 class HomeNoteView extends StatelessWidget {
-  const HomeNoteView({super.key});
+  const HomeNoteView({super.key,});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,6 +15,7 @@ class HomeNoteView extends StatelessWidget {
             spacing: 10,
             children: [
               CustomAppBar(
+
                 text: "Notes",
                 onPress: () {},
                 iconButton: Icons.search_outlined,
@@ -25,8 +26,9 @@ class HomeNoteView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return const Column(
                       children: [
-                        CustomListViewWidget(),
-                        SizedBox(height: 16),
+                        CustomListViewWidget(
+                        ),
+                         SizedBox(height: 16),
                       ],
                     );
                   },

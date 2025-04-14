@@ -3,8 +3,7 @@ import '../../../core/widgets/custom_app_bar.dart';
 import '../../../core/widgets/def_bottom_sheet.dart';
 
 class EditeNoteView  extends StatelessWidget{
-  const EditeNoteView({super.key});
-
+  const EditeNoteView({super.key,});
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -29,5 +28,4 @@ class EditeNoteView  extends StatelessWidget{
      ),
    );
   }
-
 }

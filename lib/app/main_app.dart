@@ -1,21 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-
+import 'package:notes_proj/app/logic/them_toggle_cubit.dart';
 import '../core/constant/app_constant.dart';
 import '../features/home_note/views/home_note_view.dart';
+import 'logic/them_toggle_state.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  final bool isDark =true;
+
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: kAppTitle,
-      theme: ThemeData(
-        brightness:isDark ? Brightness.dark: Brightness.light,
-        fontFamily: kFontFamily,
+    return BlocProvider(
+      create: (context) => ThemToggleCubit(),
+      child: BlocBuilder<ThemToggleCubit, ThemToggleState>(
+        builder: (context, state) {
+          final isDark = context.read<ThemToggleCubit>().isDark;
+          return GetMaterialApp(
+            title: kAppTitle,
+            theme: ThemeData(
+              brightness: isDark? Brightness.dark : Brightness.light,
+              fontFamily: kFontFamily,
+            ),
+            home: const HomeNoteView(),
+          );
+        },
       ),
-      home: const HomeNoteView(),
     );
   }
 }

@@ -3,7 +3,7 @@ import '../../../../core/helper/my_navigator_app.dart';
 import '../../../edite_note/views/edit_note_view.dart';
 
 class CustomListViewWidget extends StatelessWidget {
-  const CustomListViewWidget({super.key});
+  const CustomListViewWidget({super.key, });
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,8 @@ class CustomListViewWidget extends StatelessWidget {
               color: Colors.black38,
             ),
             onTap: () {
-              AppNavigator.navigatorPushGo(context: context, navigatorToPage: const EditeNoteView());
+              AppNavigator.navigatorPushGo(context: context, navigatorToPage: const EditeNoteView(
+              ));
             },
           ),
           const Padding(
