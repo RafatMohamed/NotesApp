@@ -7,6 +7,7 @@ part of 'model.dart';
 // **************************************************************************
 
 class AddNoteModelAdapter extends TypeAdapter<AddNoteModel> {
+
   @override
   final int typeId = 0;
 

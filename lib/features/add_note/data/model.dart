@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 
 part 'model.g.dart';
+
 @HiveType(typeId: 0)
 class AddNoteModel{
   @HiveField(0)
