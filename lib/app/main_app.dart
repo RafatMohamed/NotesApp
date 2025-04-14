@@ -15,11 +15,14 @@ class MyApp extends StatelessWidget {
       create: (context) => ThemToggleCubit(),
       child: BlocBuilder<ThemToggleCubit, ThemToggleState>(
         builder: (context, state) {
-          final isDark = context.read<ThemToggleCubit>().isDark;
+          final cubit =context.read<ThemToggleCubit>();
+          if (state is ThemToggleSuccess) {
+            cubit.isDark = state.isDark;
+          };
           return GetMaterialApp(
             title: kAppTitle,
             theme: ThemeData(
-              brightness: isDark? Brightness.dark : Brightness.light,
+              brightness: cubit.isDark? Brightness.dark : Brightness.light,
               fontFamily: kFontFamily,
             ),
             home: const HomeNoteView(),

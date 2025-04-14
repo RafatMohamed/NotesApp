@@ -46,7 +46,7 @@ class CustomAppBar extends StatelessWidget {
                     final cubit = context.read<ThemToggleCubit>();
                     return IconButton(
                         onPressed: () {
-                          cubit.toggleThem();
+                          cubit.toggleTheme();
                         },
                         icon: Icon(
                         cubit.isDark?Icons.brightness_4_outlined:Icons.brightness_4,
