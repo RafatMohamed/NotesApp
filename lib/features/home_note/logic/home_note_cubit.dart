@@ -13,4 +13,8 @@ class HomeNoteCubit extends Cubit<HomeNoteState> {
      note = box.values.toList().cast<AddNoteModel>();
      emit(HomeNoteSuccess());
    }
+ clear () async {
+    var box = Hive.box<AddNoteModel>(kOpenBoxNote);
+   await box.clear();
+  }
 }

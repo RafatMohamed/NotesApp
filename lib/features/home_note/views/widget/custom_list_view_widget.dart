@@ -5,8 +5,6 @@ import 'package:notes_proj/core/helper/notify_app.dart';
 import 'package:notes_proj/features/add_note/data/model.dart';
 import '../../../../core/helper/my_navigator_app.dart';
 import '../../../edite_note/views/edit_note_view.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../logic/home_note_cubit.dart';
 
@@ -43,7 +41,7 @@ class CustomListViewWidget extends StatelessWidget {
                 //     AppNotify.snackBar(widget:const Text("delete Success"), context: context),
                 //     );
                 AppNotify.showErrorDialog(
-                  message: "you Want to delete this Note Success",
+                  message: "you Want to delete this Note ",
                   context: context,
                   onPressed: ()  {
                      note.delete();
@@ -51,7 +49,6 @@ class CustomListViewWidget extends StatelessWidget {
                      BlocProvider.of<HomeNoteCubit>(context).geDataNote();
                   },
                 );
-
                 BlocProvider.of<HomeNoteCubit>(context).geDataNote();
               },
               icon: const Icon(Icons.delete, size: 30, color: Colors.black38),
