@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:notes_proj/core/helper/my_navigator_app.dart';
+import 'package:notes_proj/core/resources/app_color.dart';
 
 abstract class AppNotify {
   static SnackBar snackBar({required Widget widget, required BuildContext context}) => SnackBar(
@@ -6,28 +8,32 @@ abstract class AppNotify {
     behavior: SnackBarBehavior.floating,
     duration: const Duration(seconds: 2),
     shape: BeveledRectangleBorder(
-      side: const BorderSide(color: Colors.white, width: 1.5),
+      side: BorderSide(color: AppColor(context).whiteColor, width: 1.5),
       borderRadius: BorderRadius.circular(20),
     ),
     margin: const EdgeInsetsDirectional.only(start: 10, end: 10, bottom: 2),
-    backgroundColor: Colors.green,
+    backgroundColor: AppColor(context).whiteColor,
     content: widget,
   );
 
   static Future<T?> showErrorDialog<T>({
     required BuildContext context,
     required String message,
+    required Function() onPressed,
   }) {
     return showDialog<T>(
       context: context,
-      builder:
-          (context) => AlertDialog(
+      builder: (context) => AlertDialog(
             title: const Text("error"),
             content: Text(message),
             actions: [
               TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text("Ok"),
+                onPressed: onPressed,
+                child: const Text("yes"),
+              ),
+              TextButton(
+                onPressed:()=> AppNavigator.navigatorPop(context: context),
+                child: const Text("No"),
               ),
             ],
           ),
