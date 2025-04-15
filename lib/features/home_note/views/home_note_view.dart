@@ -24,8 +24,9 @@ class HomeNoteView extends StatelessWidget {
               ),
                Expanded(
                 child: BlocProvider(
-                  create: (context) => HomeNoteCubit(),
-                  child: const ListViewBuilder(),
+                  create: (context) => HomeNoteCubit()..geDataNote(),
+                  child: const
+                  ListViewBuilder(),
                 ),
               ),
             ],

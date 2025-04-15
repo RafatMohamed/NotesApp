@@ -55,7 +55,7 @@ class CustomListViewWidget extends StatelessWidget {
                 end: 16
             ),
             child:Text(
-              "${note.createdAt}",
+              formatDate(note.createdAt),
               style:const TextStyle(
                 fontSize: 18,
                 color: Colors.black38,

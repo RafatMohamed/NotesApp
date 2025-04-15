@@ -7,9 +7,10 @@ import 'home_note_state.dart';
 class HomeNoteCubit extends Cubit<HomeNoteState> {
   HomeNoteCubit() : super(HomeNoteInitial());
   List<AddNoteModel>? note;
-   geDataNote ()
-   {
+  Future<void> geDataNote () async {
+     emit(HomeNoteLoading());
      var box = Hive.box<AddNoteModel>(kOpenBoxNote);
-     note = box.values.toList();
+     note = box.values.toList().cast<AddNoteModel>();
+     emit(HomeNoteSuccess());
    }
 }

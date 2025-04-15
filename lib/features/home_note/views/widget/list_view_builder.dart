@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_proj/core/helper/notify_app.dart';
 import '../../../add_note/data/model.dart';
 import '../../logic/home_note_cubit.dart';
 import '../../logic/home_note_state.dart';
@@ -21,22 +22,39 @@ class _ListViewBuilderState extends State<ListViewBuilder> {
   }
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeNoteCubit, HomeNoteState>(
-      builder: (context, state) {
-        List <AddNoteModel> note = BlocProvider.of<HomeNoteCubit>(context).note! ;
-        return ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemCount:note.length ,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                CustomListViewWidget(note:note[index],),
-                const SizedBox(height: 16),
-              ],
+    return RefreshIndicator(
+      onRefresh: () => BlocProvider.of<HomeNoteCubit>(context).geDataNote(),
+      child: BlocBuilder<HomeNoteCubit, HomeNoteState>(
+        builder: (context, state) {
+          if (state is HomeNoteLoading) {
+            return AppNotify.circularProgress();
+          }
+
+          if (state is HomeNoteSuccess) {
+            List<AddNoteModel> notes = BlocProvider.of<HomeNoteCubit>(context).note ?? [];
+
+            if (notes.isEmpty) {
+              return const Center(child: Text("No notes yet."));
+            }
+
+            return ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: notes.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    CustomListViewWidget(note: notes[index]),
+                    const SizedBox(height: 16),
+                  ],
+                );
+              },
             );
-          },
-        );
-      },
+          }
+
+          return const SizedBox(); // fallback
+        },
+      ),
     );
   }
+
 }
