@@ -4,10 +4,8 @@ import '../../../../core/constant/app_constant.dart';
 import '../../../../core/widgets/custom_text_form_field_widget.dart';
 import '../../../../core/widgets/default_material_button.dart';
 
-class DefaultBottomSheet extends StatelessWidget {
-   DefaultBottomSheet({super.key, required this.textButton, required this.onPressed});
- final String textButton;
- final Function() onPressed;
+class DefaultBottomSheetEditeNote extends StatelessWidget {
+   DefaultBottomSheetEditeNote({super.key,});
  final TextEditingController titleController =TextEditingController();
  final TextEditingController descController =TextEditingController();
  final GlobalKey<FormState> keyForm = GlobalKey();
@@ -49,10 +47,9 @@ class DefaultBottomSheet extends StatelessWidget {
                   ],
                 ),
                 DefaultMaterialButton(
-                  text: textButton,
+                  text: "Save",
                   onPressed: () {
                     if(keyForm.currentState!.validate()){
-                      onPressed;
                     }
                   },
                 ),

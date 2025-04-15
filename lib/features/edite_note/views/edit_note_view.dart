@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:notes_proj/features/edite_note/views/widgets/def_bottom_sheet_edit_note.dart';
 import '../../../core/widgets/custom_app_bar.dart';
-import '../../../core/widgets/def_bottom_sheet.dart';
 
 class EditeNoteView  extends StatelessWidget{
   const EditeNoteView({super.key,});
@@ -20,8 +20,7 @@ class EditeNoteView  extends StatelessWidget{
                  iconButton: Icons.check_sharp,
                ),
              ),
-              DefaultBottomSheet(textButton: "Save",onPressed: () {
-               },),
+             DefaultBottomSheetEditeNote(),
            ],
          ),
        ),

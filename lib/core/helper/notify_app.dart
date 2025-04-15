@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:scholar_chat_proj/core/constants/app_constant.dart';
 
-abstract class NotifyApp {
-  static SnackBar snackBar({required Widget widget}) => SnackBar(
+import '../resources/app_color.dart';
+
+abstract class AppNotify {
+  static SnackBar snackBar({required Widget widget, required BuildContext context}) => SnackBar(
     dismissDirection: DismissDirection.startToEnd,
     behavior: SnackBarBehavior.floating,
     duration: const Duration(seconds: 2),
     shape: BeveledRectangleBorder(
-      side: const BorderSide(color: Colors.black, width: 1.5),
+      side: BorderSide(color: AppColor(context).blackColor, width: 1.5),
       borderRadius: BorderRadius.circular(20),
     ),
     margin: const EdgeInsetsDirectional.only(start: 10, end: 10, bottom: 2),
-    backgroundColor: Colors.white,
+    backgroundColor: AppColor(context).whiteColor,
     content: widget,
   );
 
@@ -36,10 +37,10 @@ abstract class NotifyApp {
   }
 
   static Widget circularProgress() {
-    return Center(
+    return const Center(
       child: CircularProgressIndicator(
-        backgroundColor: Colors.white,
-        color: AppConstant.primaryColor,
+        backgroundColor: Colors.black,
+        color: Colors.white,
       ),
     );
   }
