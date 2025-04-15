@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:notes_proj/features/home_note/views/widget/custom_list_view_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_proj/features/home_note/views/widget/list_view_builder.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import '../../add_note/views/add_note_view.dart';
+import '../logic/home_note_cubit.dart';
 
 class HomeNoteView extends StatelessWidget {
   const HomeNoteView({super.key,});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,23 +18,14 @@ class HomeNoteView extends StatelessWidget {
             spacing: 10,
             children: [
               CustomAppBar(
-
                 text: "Notes",
                 onPress: () {},
                 iconButton: Icons.search_outlined,
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return const Column(
-                      children: [
-                        CustomListViewWidget(
-                        ),
-                         SizedBox(height: 16),
-                      ],
-                    );
-                  },
+               Expanded(
+                child: BlocProvider(
+                  create: (context) => HomeNoteCubit(),
+                  child: const ListViewBuilder(),
                 ),
               ),
             ],
