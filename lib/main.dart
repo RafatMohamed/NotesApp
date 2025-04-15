@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:notes_proj/core/ObserveModel.dart';
+import 'package:notes_proj/core/observe_model.dart';
 
 import 'app/main_app.dart';
 import 'core/constant/app_constant.dart';
@@ -13,13 +13,9 @@ void main() async{
   await Hive.initFlutter();
   Bloc.observer=DefaultObserve();
   Hive.registerAdapter(AddNoteModelAdapter());
-  if (!Hive.isBoxOpen(kOpenBoxHive)) {
-    await Hive.openBox<AddNoteModel>(kOpenBoxHive);
-  }
+  await Hive.openBox<AddNoteModel>(kOpenBoxNote);
+  await Hive.openBox(kOpenBoxSettingThem);
 
-  if (!Hive.isBoxOpen(kOpenBoxSettingThem)) {
-    await Hive.openBox(kOpenBoxSettingThem);
-  }
 
   runApp(const MyApp());
 }

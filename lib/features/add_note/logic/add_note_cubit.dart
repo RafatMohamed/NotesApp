@@ -12,9 +12,8 @@ class AddNoteCubit extends Cubit<AddNoteState> {
   final GlobalKey<FormState> keyForm = GlobalKey();
  Future  add ({required AddNoteModel notes }) async{
    emit(AddNoteLoading());
-  // await  Future.delayed(const Duration(seconds: 5));
    try{
-     var box = Hive.box<AddNoteModel>(kOpenBoxHive);
+     var box = Hive.box<AddNoteModel>(kOpenBoxNote);
      await box.add(notes);
      emit(AddNoteSuccess());
    }catch(e)

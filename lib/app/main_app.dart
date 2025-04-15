@@ -11,14 +11,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(
+    return BlocProvider(
       create: (context) => ThemToggleCubit(),
       child: BlocBuilder<ThemToggleCubit, ThemToggleState>(
         builder: (context, state) {
           final cubit = context.read<ThemToggleCubit>();
           if (state is ThemToggleSuccess) {
             cubit.isDark = state.isDark;
-          };
+          }
           return GetMaterialApp(
             title: kAppTitle,
             theme: ThemeData(

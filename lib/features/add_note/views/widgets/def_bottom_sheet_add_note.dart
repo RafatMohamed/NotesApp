@@ -60,11 +60,11 @@ class DefaultBottomSheetAddNote extends StatelessWidget {
                 BlocConsumer<AddNoteCubit, AddNoteState>(
                   listener: (context, state) {
                    if(state is AddNoteFailed){
-                     AppNotify.snackBar(widget: SnackBar(content: Text(state.error)), context: context);
+                     AppNotify.snackBar(widget:Text(state.error), context: context);
                    }
                    if(state is AddNoteSuccess){
-                     AppNotify.snackBar(widget: const SnackBar(content: Text("Add Success")), context: context);
                      AppNavigator.navigatorPop(context: context);
+                     AppNotify.snackBar(widget:const Text("Add Success"),context: context);
                    }
                   },
                   builder: (context, state) {
