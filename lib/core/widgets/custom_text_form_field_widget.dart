@@ -19,7 +19,6 @@ class TextFormFieldApp extends StatefulWidget {
     this.radius =15,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.done,
-    this.validator,
     required this.onFieldSubmitted,
     this.focusNode,
     required this.controller,
@@ -42,7 +41,6 @@ class TextFormFieldApp extends StatefulWidget {
   final double radius;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
-  final FormFieldValidator? validator;
   final Function(String) onFieldSubmitted;
   final FormFieldSetter<String>? onSaved;
   final FocusNode? focusNode;
@@ -75,7 +73,12 @@ class _TextFormFieldAppState extends State<TextFormFieldApp> {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         enableSuggestions: true,
         onSaved: widget.onSaved,
-        validator: widget.validator,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'the Form is required';
+          }
+          return null;
+        },
         onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.always,
