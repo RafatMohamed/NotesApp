@@ -9,6 +9,7 @@ import 'package:notes_proj/features/add_note/logic/add_note_state.dart';
 import '../../../../core/constant/app_constant.dart';
 import '../../../../core/widgets/custom_text_form_field_widget.dart';
 import '../../../../core/widgets/default_material_button.dart';
+import '../../../home_note/logic/home_note_cubit.dart';
 
 class DefaultBottomSheetAddNote extends StatelessWidget {
   const DefaultBottomSheetAddNote({super.key});
@@ -60,12 +61,17 @@ class DefaultBottomSheetAddNote extends StatelessWidget {
                 BlocConsumer<AddNoteCubit, AddNoteState>(
                   listener: (context, state) {
                    if(state is AddNoteFailed){
-                     AppNotify.snackBar(widget:Text(state.error), context: context);
+                   ScaffoldMessenger.of(context).showSnackBar(
+                       AppNotify.snackBar(widget:Text(state.error), context: context)
+                   );
                    }
                    if(state is AddNoteSuccess){
+                     BlocProvider.of<HomeNoteCubit>(context).geDataNote();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        AppNotify.snackBar(widget:const Text("Add Success"),context: context)
+                    );
                      AppNavigator.navigatorPop(context: context);
-                     AppNotify.snackBar(widget:const Text("Add Success"),context: context);
-                   }
+                  }
                   },
                   builder: (context, state) {
                     if(state is AddNoteLoading){
