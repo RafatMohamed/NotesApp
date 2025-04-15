@@ -4,7 +4,7 @@ import 'package:notes_proj/app/logic/them_toggle_state.dart';
 import 'package:notes_proj/core/constant/app_constant.dart';
 
 class ThemToggleCubit extends Cubit<ThemToggleState> {
-  final Box settingsThemBox = Hive.box(kOpenBoxHive);
+  final Box settingsThemBox = Hive.box(kOpenBoxSettingThem);
   bool isDark = true;
   ThemToggleCubit() : super(ThemToggleInitial()) {
     final isDark = settingsThemBox.get('isDark', defaultValue: true);
@@ -19,4 +19,5 @@ class ThemToggleCubit extends Cubit<ThemToggleState> {
       emit(ThemToggleSuccess(isDark: newTheme));
     }
   }
+
 }
