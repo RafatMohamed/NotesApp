@@ -22,12 +22,9 @@ class HomeNoteView extends StatelessWidget {
                 onPress: () {},
                 iconButton: Icons.search_outlined,
               ),
-               Expanded(
-                child: BlocProvider(
-                  create: (context) => HomeNoteCubit()..geDataNote(),
-                  child: const
-                  ListViewBuilder(),
-                ),
+             const Expanded(
+                child:
+                ListViewBuilder(),
               ),
             ],
           ),
