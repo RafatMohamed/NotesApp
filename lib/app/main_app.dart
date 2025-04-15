@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:notes_proj/app/logic/them_toggle_cubit.dart';
 import '../core/constant/app_constant.dart';
+import '../features/home_note/logic/home_note_cubit.dart';
 import '../features/home_note/views/home_note_view.dart';
 import 'logic/them_toggle_state.dart';
 
@@ -11,8 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemToggleCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ThemToggleCubit(),
+        ),
+        BlocProvider(
+          create: (context) => HomeNoteCubit()..geDataNote(),
+        ),
+      ],
       child: BlocBuilder<ThemToggleCubit, ThemToggleState>(
         builder: (context, state) {
           final cubit = context.read<ThemToggleCubit>();
@@ -25,7 +33,11 @@ class MyApp extends StatelessWidget {
               brightness: cubit.isDark ? Brightness.dark : Brightness.light,
               fontFamily: kFontFamily,
             ),
-            home: const HomeNoteView(),
+            home: RefreshIndicator(
+                triggerMode: RefreshIndicatorTriggerMode.anywhere,
+                onRefresh: () =>
+                    BlocProvider.of<HomeNoteCubit>(context).geDataNote(),
+                child: const HomeNoteView()),
           );
         },
       ),
