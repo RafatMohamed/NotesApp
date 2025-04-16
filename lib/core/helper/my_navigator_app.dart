@@ -20,14 +20,15 @@ abstract class AppNavigator {
     return Navigator.pop(context);
   }
 
-  static void navigatorPushGo({
+  static Future<T?> navigatorPushGo<T>({
     required BuildContext context,
     required Widget navigatorToPage,
-  }) {
-    Get.to(
-      () => navigatorToPage,
+  }) async {
+    return Get.to<T>(
+          () => navigatorToPage,
       duration: const Duration(seconds: 1),
       transition: Transition.fadeIn,
     );
   }
+
 }

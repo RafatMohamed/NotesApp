@@ -17,11 +17,9 @@ class HomeNoteView extends StatelessWidget {
           child: Column(
             spacing: 10,
             children: [
-              CustomAppBar(
+             const CustomAppBar(
                 text: "Notes",
-                onPress: () {},
-                iconButton: Icons.search_outlined,
-              ),
+             ),
               const Expanded(child: ListViewBuilder()),
               textClearNote(context),
             ],

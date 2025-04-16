@@ -21,6 +21,7 @@ class PickColorItems extends StatelessWidget {
               title: const Text('Pick Note Color'),
               content: SingleChildScrollView(
                 child: MaterialPicker(
+                  portraitOnly: true,
                   pickerColor: cubit.selectedColor,
                   onColorChanged: (color) => cubit.changeColor(color),
                 ),

@@ -28,7 +28,7 @@ class EditeNoteCubit extends Cubit<EditeNoteState> {
       titleController.text.isNotEmpty
           ? notes.title = titleController.text
           : notes.title;
-      notes.color = selectedColor.value;
+      notes.color = selectedColor.toARGB32();
       await box.putAt(index, notes);
       emit(EditeNoteSuccess());
     } catch (e) {

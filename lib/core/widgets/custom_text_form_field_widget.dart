@@ -21,10 +21,12 @@ class TextFormFieldApp extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.done,
     required this.onFieldSubmitted,
+     this.onChange,
     this.focusNode,
     required this.controller,
     this.onSaved,
     this.validator,
+    this.suffixIcon,
   });
 
   final bool iconSuffix;
@@ -44,11 +46,13 @@ class TextFormFieldApp extends StatefulWidget {
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final Function(String) onFieldSubmitted;
+  final Function(String)? onChange;
   final String? Function(String?)? validator; // (value) {
 
   final FormFieldSetter<String>? onSaved;
   final FocusNode? focusNode;
   final TextEditingController controller;
+  final  IconButton? suffixIcon;
 
   @override
   State<TextFormFieldApp> createState() => _TextFormFieldAppState();
@@ -76,25 +80,12 @@ class _TextFormFieldAppState extends State<TextFormFieldApp> {
         onSaved: widget.onSaved,
         validator: widget.validator,
         onFieldSubmitted: widget.onFieldSubmitted,
+        onChanged: widget.onChange,
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.always,
           floatingLabelAlignment: FloatingLabelAlignment.start,
           border: InputBorder.none,
-          // icon:
-          //     widget.iconSuffix
-          //         ? IConSvgWidget(
-          //           radius: AppSizeHW.s5,
-          //           width: AppSizeHW.s35,
-          //           height: AppSizeHW.s35,
-          //           colorContainer: MyColors.containerHomeColor,
-          //           icon: SvgPicture.asset(
-          //             width: AppSizeHW.s20,
-          //             height: AppSizeHW.s20,
-          //             MyIcons.iconHomeSvg,
-          //             fit: LayoutBoxFit.boxFitNone,
-          //           ),
-          //         )
-          //         : null,
+          icon: widget.suffixIcon,
           labelText: widget.labelText,
           labelStyle: TextStyle(
             color: widget.labelColor,

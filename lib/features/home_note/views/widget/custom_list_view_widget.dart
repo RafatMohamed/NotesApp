@@ -13,11 +13,12 @@ class CustomListViewWidget extends StatelessWidget {
     super.key,
     required this.note,
     required this.index,
+    this.isShow = false,
   });
 
   final NoteModel note;
   final int index;
-
+  final bool isShow;
   @override
   Widget build(BuildContext context) {
     Color backgroundColor = Color(note.color);
@@ -48,7 +49,7 @@ class CustomListViewWidget extends StatelessWidget {
                 style: TextStyle(fontSize: 18, color:textColor.withValues(alpha: 0.5)),
               ),
             ),
-            trailing: IconButton(
+            trailing: isShow ? const Text("") :IconButton(
               onPressed: () async {
                 // ScaffoldMessenger.of(context).showSnackBar(
                 //     AppNotify.snackBar(widget:const Text("delete Success"), context: context),
@@ -70,7 +71,7 @@ class CustomListViewWidget extends StatelessWidget {
             onTap: () {
               AppNavigator.navigatorPushGo(
                 context: context,
-                navigatorToPage: EditeNoteView(note: note, index: index),
+                navigatorToPage: EditeNoteView(note: note, index: index,),
               );
             },
           ),
