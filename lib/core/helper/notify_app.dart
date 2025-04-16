@@ -3,7 +3,10 @@ import 'package:notes_proj/core/helper/my_navigator_app.dart';
 import 'package:notes_proj/core/resources/app_color.dart';
 
 abstract class AppNotify {
-  static SnackBar snackBar({required Widget widget, required BuildContext context}) => SnackBar(
+  static SnackBar snackBar({
+    required Widget widget,
+    required BuildContext context,
+  }) => SnackBar(
     dismissDirection: DismissDirection.startToEnd,
     behavior: SnackBarBehavior.floating,
     duration: const Duration(seconds: 2),
@@ -19,21 +22,30 @@ abstract class AppNotify {
   static Future<T?> showErrorDialog<T>({
     required BuildContext context,
     required String message,
+    required String alertMess,
     required Function() onPressed,
   }) {
     return showDialog<T>(
       context: context,
-      builder: (context) => AlertDialog(
-            title: const Text("error"),
+      builder:
+          (context) => AlertDialog(
+            title: Text(alertMess),
             content: Text(message),
             actions: [
               TextButton(
-                onPressed: onPressed,
-                child: const Text("yes"),
+                onPressed: () => AppNavigator.navigatorPop(context: context),
+                child: const Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.green),
+                ),
               ),
+              const Spacer(),
               TextButton(
-                onPressed:()=> AppNavigator.navigatorPop(context: context),
-                child: const Text("No"),
+                onPressed: onPressed,
+                child: const Text(
+                  "yes delete",
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
             ],
           ),

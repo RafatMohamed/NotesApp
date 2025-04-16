@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_proj/core/helper/notify_app.dart';
-import 'package:notes_proj/features/add_note/data/model.dart';
+
+import '../../../../core/data/model.dart';
 import '../../../../core/helper/my_navigator_app.dart';
 import '../../../edite_note/views/edit_note_view.dart';
-
 import '../../logic/home_note_cubit.dart';
 
 class CustomListViewWidget extends StatelessWidget {
-  const CustomListViewWidget({super.key, required this.note});
-  final AddNoteModel note;
+  const CustomListViewWidget({
+    super.key,
+    required this.note,
+    required this.index,
+  });
+
+  final NoteModel note;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +47,13 @@ class CustomListViewWidget extends StatelessWidget {
                 //     AppNotify.snackBar(widget:const Text("delete Success"), context: context),
                 //     );
                 AppNotify.showErrorDialog(
+                  alertMess: "Delete Note",
                   message: "you Want to delete this Note ",
                   context: context,
-                  onPressed: ()  {
-                     note.delete();
-                     AppNavigator.navigatorPop(context: context);
-                     BlocProvider.of<HomeNoteCubit>(context).geDataNote();
+                  onPressed: () {
+                    note.delete();
+                    AppNavigator.navigatorPop(context: context);
+                    BlocProvider.of<HomeNoteCubit>(context).geDataNote();
                   },
                 );
                 BlocProvider.of<HomeNoteCubit>(context).geDataNote();
@@ -56,7 +63,7 @@ class CustomListViewWidget extends StatelessWidget {
             onTap: () {
               AppNavigator.navigatorPushGo(
                 context: context,
-                navigatorToPage: const EditeNoteView(),
+                navigatorToPage: EditeNoteView(note: note, index: index),
               );
             },
           ),

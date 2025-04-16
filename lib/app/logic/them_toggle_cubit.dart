@@ -19,5 +19,4 @@ class ThemToggleCubit extends Cubit<ThemToggleState> {
       emit(ThemToggleSuccess(isDark: newTheme));
     }
   }
-
 }

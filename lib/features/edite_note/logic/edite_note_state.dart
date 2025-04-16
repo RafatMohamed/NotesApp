@@ -1,9 +1,13 @@
- class AddNoteState {}
+class EditeNoteState {}
 
-final class AddNoteInitial extends AddNoteState {}
-final class AddNoteLoading extends AddNoteState {}
-final class AddNoteSuccess extends AddNoteState {}
-final class AddNoteFailed extends AddNoteState {
+final class EditeNoteInitial extends EditeNoteState {}
+
+final class EditeNoteLoading extends EditeNoteState {}
+
+final class EditeNoteSuccess extends EditeNoteState {}
+
+final class EditeNoteFailed extends EditeNoteState {
   final String error;
-  AddNoteFailed({required this.error});
+
+  EditeNoteFailed({required this.error});
 }

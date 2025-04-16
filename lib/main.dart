@@ -5,18 +5,15 @@ import 'package:notes_proj/core/observe_model.dart';
 
 import 'app/main_app.dart';
 import 'core/constant/app_constant.dart';
-import 'features/add_note/data/model.dart';
+import 'core/data/model.dart';
 
-void main() async{
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Bloc.observer=DefaultObserve();
-  Hive.registerAdapter(AddNoteModelAdapter());
-  await Hive.openBox<AddNoteModel>(kOpenBoxNote);
+  Bloc.observer = DefaultObserve();
+  Hive.registerAdapter(NoteModelAdapter());
+  await Hive.openBox<NoteModel>(kOpenBoxNote);
   await Hive.openBox(kOpenBoxSettingThem);
-
 
   runApp(const MyApp());
 }
-

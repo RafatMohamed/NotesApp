@@ -6,7 +6,8 @@ import 'package:notes_proj/core/resources/app_color.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
-    super.key, required this.text,
+    super.key,
+    required this.text,
     required this.iconButton,
     required this.onPress,
   });
@@ -15,7 +16,6 @@ class CustomAppBar extends StatelessWidget {
   final IconData iconButton;
   final Function() onPress;
 
-
   @override
   Widget build(BuildContext context) {
     return Builder(
@@ -23,12 +23,7 @@ class CustomAppBar extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text(
-              text,
-              style: const TextStyle(
-                fontSize: 28,
-              ),
-            ),
+            Text(text, style: const TextStyle(fontSize: 28)),
             Row(
               children: [
                 Container(
@@ -37,21 +32,23 @@ class CustomAppBar extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: IconButton(
-                      onPressed: onPress,
-                      icon: Icon(iconButton, size: 28,)
+                    onPressed: onPress,
+                    icon: Icon(iconButton, size: 28),
                   ),
                 ),
                 BlocBuilder<ThemToggleCubit, ThemToggleState>(
                   builder: (context, state) {
                     final cubit = context.read<ThemToggleCubit>();
                     return IconButton(
-                        onPressed: () {
-                          cubit.toggleTheme();
-                        },
-                        icon: Icon(
-                        cubit.isDark?Icons.brightness_4_outlined:Icons.brightness_4,
-                          size: 28,
-                        )
+                      onPressed: () {
+                        cubit.toggleTheme();
+                      },
+                      icon: Icon(
+                        cubit.isDark
+                            ? Icons.brightness_4_outlined
+                            : Icons.brightness_4,
+                        size: 28,
+                      ),
                     );
                   },
                 ),
@@ -59,7 +56,7 @@ class CustomAppBar extends StatelessWidget {
             ),
           ],
         );
-      }
+      },
     );
   }
 }

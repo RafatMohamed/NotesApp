@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:notes_proj/app/logic/them_toggle_cubit.dart';
+
 import '../core/constant/app_constant.dart';
 import '../features/home_note/logic/home_note_cubit.dart';
 import '../features/home_note/views/home_note_view.dart';
@@ -14,12 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => ThemToggleCubit(),
-        ),
-        BlocProvider(
-          create: (context) => HomeNoteCubit()..geDataNote(),
-        ),
+        BlocProvider(create: (context) => ThemToggleCubit()),
+        BlocProvider(create: (context) => HomeNoteCubit()..geDataNote()),
       ],
       child: BlocBuilder<ThemToggleCubit, ThemToggleState>(
         builder: (context, state) {
@@ -34,10 +31,11 @@ class MyApp extends StatelessWidget {
               fontFamily: kFontFamily,
             ),
             home: RefreshIndicator(
-                triggerMode: RefreshIndicatorTriggerMode.anywhere,
-                onRefresh: () =>
-                    BlocProvider.of<HomeNoteCubit>(context).geDataNote(),
-                child: const HomeNoteView()),
+              triggerMode: RefreshIndicatorTriggerMode.anywhere,
+              onRefresh:
+                  () => BlocProvider.of<HomeNoteCubit>(context).geDataNote(),
+              child: const HomeNoteView(),
+            ),
           );
         },
       ),

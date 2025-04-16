@@ -1,6 +1,7 @@
- class ThemToggleState {}
+class ThemToggleState {}
 
 final class ThemToggleInitial extends ThemToggleState {}
+
 final class ThemToggleSuccess extends ThemToggleState {
   final bool isDark;
 

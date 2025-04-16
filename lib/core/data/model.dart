@@ -3,20 +3,19 @@ import 'package:hive/hive.dart';
 part 'model.g.dart';
 
 @HiveType(typeId: 0)
-class AddNoteModel extends HiveObject{
+class NoteModel extends HiveObject {
   @HiveField(0)
-  final String title;
+  String title;
   @HiveField(1)
-  final String desc;
+  String desc;
   @HiveField(2)
-  final DateTime  createdAt;
+  final DateTime createdAt;
   @HiveField(3)
-  final int color;
-  AddNoteModel( {
+  int color;
+  NoteModel({
     required this.title,
     required this.desc,
     required this.createdAt,
     required this.color,
   });
-
 }

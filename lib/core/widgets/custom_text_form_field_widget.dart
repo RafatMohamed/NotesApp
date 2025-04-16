@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_proj/core/resources/app_color.dart';
+
 class TextFormFieldApp extends StatefulWidget {
   const TextFormFieldApp({
     super.key,
@@ -8,21 +9,22 @@ class TextFormFieldApp extends StatefulWidget {
     required this.labelText,
     this.labelFontWeight = FontWeight.normal,
     this.labelFontSize = 19,
-    required this.labelColor ,
+    required this.labelColor,
     this.labelFontStyle = FontStyle.normal,
     this.labelTextAlign = TextAlign.start,
     required this.hintText,
     this.hintFontWeight = FontWeight.w200,
-    this.hintFontSize =14,
+    this.hintFontSize = 14,
     this.hintFontStyle = FontStyle.normal,
     this.hintTextAlign = TextAlign.start,
-    this.radius =15,
+    this.radius = 15,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.done,
     required this.onFieldSubmitted,
     this.focusNode,
     required this.controller,
     this.onSaved,
+    this.validator,
   });
 
   final bool iconSuffix;
@@ -42,6 +44,8 @@ class TextFormFieldApp extends StatefulWidget {
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
   final Function(String) onFieldSubmitted;
+  final String? Function(String?)? validator; // (value) {
+
   final FormFieldSetter<String>? onSaved;
   final FocusNode? focusNode;
   final TextEditingController controller;
@@ -50,22 +54,19 @@ class TextFormFieldApp extends StatefulWidget {
   State<TextFormFieldApp> createState() => _TextFormFieldAppState();
 }
 
-
 class _TextFormFieldAppState extends State<TextFormFieldApp> {
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.transparent, // Keep background white
         borderRadius: BorderRadius.circular(widget.radius),
-        border: Border.all(
-          color: AppColor(context).whiteColor,
-          width: 2,
-        ),
+        border: Border.all(color: AppColor(context).whiteColor, width: 2),
       ),
-      padding: const EdgeInsetsDirectional.symmetric(horizontal: 10,vertical: 10),
+      padding: const EdgeInsetsDirectional.symmetric(
+        horizontal: 10,
+        vertical: 10,
+      ),
       width: double.infinity,
       child: TextFormField(
         focusNode: widget.focusNode,
@@ -73,12 +74,7 @@ class _TextFormFieldAppState extends State<TextFormFieldApp> {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         enableSuggestions: true,
         onSaved: widget.onSaved,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'the Form is required';
-          }
-          return null;
-        },
+        validator: widget.validator,
         onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -115,10 +111,7 @@ class _TextFormFieldAppState extends State<TextFormFieldApp> {
         maxLines: widget.maxLine,
         textInputAction: widget.textInputAction,
         textAlign: TextAlign.start,
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: widget.hintFontWeight,
-        ),
+        style: TextStyle(fontSize: 18, fontWeight: widget.hintFontWeight),
       ),
     );
   }
