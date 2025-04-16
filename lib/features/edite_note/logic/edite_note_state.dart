@@ -11,3 +11,4 @@ final class EditeNoteFailed extends EditeNoteState {
 
   EditeNoteFailed({required this.error});
 }
+final class EditeNoteColorChanged extends EditeNoteState {}

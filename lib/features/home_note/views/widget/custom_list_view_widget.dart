@@ -20,8 +20,15 @@ class CustomListViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColor = Color(note.color);
+    Color textColor = ThemeData.estimateBrightnessForColor(backgroundColor) == Brightness.dark
+        ? Colors.white
+        : Colors.black;
     return Container(
       decoration: BoxDecoration(
+        border: Border.all(
+          color: textColor.withGreen(5)
+        ),
         borderRadius: BorderRadius.circular(15),
         color: Color(note.color),
       ),
@@ -32,13 +39,13 @@ class CustomListViewWidget extends StatelessWidget {
             contentPadding: const EdgeInsetsDirectional.all(16),
             title: Text(
               note.title,
-              style: const TextStyle(fontSize: 26, color: Colors.black),
+              style:  TextStyle(fontSize: 26, color: textColor ),
             ),
             subtitle: Padding(
               padding: const EdgeInsetsDirectional.only(start: 2),
               child: Text(
                 note.desc,
-                style: const TextStyle(fontSize: 18, color: Colors.black38),
+                style: TextStyle(fontSize: 18, color:textColor.withValues(alpha: 0.5)),
               ),
             ),
             trailing: IconButton(
@@ -58,7 +65,7 @@ class CustomListViewWidget extends StatelessWidget {
                 );
                 BlocProvider.of<HomeNoteCubit>(context).geDataNote();
               },
-              icon: const Icon(Icons.delete, size: 30, color: Colors.black38),
+              icon: Icon(Icons.delete, size: 30, color: textColor.withValues(alpha: 0.5)),
             ),
             onTap: () {
               AppNavigator.navigatorPushGo(
@@ -75,7 +82,7 @@ class CustomListViewWidget extends StatelessWidget {
             ),
             child: Text(
               formatDate(note.createdAt),
-              style: const TextStyle(fontSize: 18, color: Colors.black38),
+              style:  TextStyle(fontSize: 18, color: textColor.withValues(alpha: 0.5)),
             ),
           ),
         ],

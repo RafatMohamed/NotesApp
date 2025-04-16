@@ -10,8 +10,15 @@ class EditeNoteCubit extends Cubit<EditeNoteState> {
   EditeNoteCubit() : super(EditeNoteInitial());
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descController = TextEditingController();
+  Color selectedColor = Colors.blue;
+
+  void changeColor(Color color) {
+    selectedColor = color;
+    emit(EditeNoteColorChanged()); // You can add a state to rebuild the UI
+  }
 
   Future editeNote({required NoteModel notes, required int index}) async {
+
     emit(EditeNoteLoading());
     try {
       var box = Hive.box<NoteModel>(kOpenBoxNote);
@@ -21,10 +28,16 @@ class EditeNoteCubit extends Cubit<EditeNoteState> {
       titleController.text.isNotEmpty
           ? notes.title = titleController.text
           : notes.title;
+      notes.color = selectedColor.value;
       await box.putAt(index, notes);
       emit(EditeNoteSuccess());
     } catch (e) {
       emit(EditeNoteFailed(error: e.toString()));
     }
+  }@override
+  Future<void> close() {
+    titleController.dispose();
+    descController.dispose();
+    return super.close();
   }
 }
