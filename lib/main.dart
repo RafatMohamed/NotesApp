@@ -9,9 +9,11 @@ import 'core/data/model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
   Bloc.observer = DefaultObserve();
   Hive.registerAdapter(NoteModelAdapter());
+
   await Hive.openBox<NoteModel>(kOpenBoxNote);
   await Hive.openBox(kOpenBoxSettingThem);
 

@@ -3,14 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_proj/features/home_note/logic/home_note_cubit.dart';
 import 'package:notes_proj/features/home_note/logic/home_note_state.dart';
 import 'package:notes_proj/features/home_note/views/widget/custom_list_view_widget.dart';
-
 import '../../../core/constant/app_constant.dart';
 import '../../../core/data/model.dart';
-import '../../../core/helper/my_navigator_app.dart';
 import '../../../core/helper/notify_app.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import '../../../core/widgets/custom_text_form_field_widget.dart';
-import '../../edite_note/views/edit_note_view.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key, required this.cubit});
@@ -32,12 +29,10 @@ class _SearchViewState extends State<SearchView> {
               if (state is HomeNoteLoading) {
                 return AppNotify.circularProgress();
               }
-
               List<NoteModel> filteredNotes = [];
               if (state is HomeNoteSearchSuccess) {
                 filteredNotes = state.notes;
               }
-
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -92,5 +87,4 @@ class _SearchViewState extends State<SearchView> {
       ),
     );
   }
-
 }

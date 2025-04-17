@@ -31,8 +31,7 @@ class _ListViewBuilderState extends State<ListViewBuilder> {
         }
 
         if (state is HomeNoteSuccess) {
-          List<NoteModel> notes =
-              BlocProvider.of<HomeNoteCubit>(context).note ?? [];
+          List<NoteModel> notes = BlocProvider.of<HomeNoteCubit>(context).note;
 
           if (notes.isEmpty) {
             return const Center(child: Text("No notes yet."));

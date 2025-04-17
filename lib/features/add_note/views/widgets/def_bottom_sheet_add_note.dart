@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_proj/core/helper/my_navigator_app.dart';
-import 'package:notes_proj/core/helper/notify_app.dart';
 import 'package:notes_proj/features/add_note/logic/add_note_cubit.dart';
 import 'package:notes_proj/features/add_note/logic/add_note_state.dart';
+import 'package:notes_proj/features/add_note/views/widgets/custom_bloc_consumer_add.dart';
 
 import '../../../../core/constant/app_constant.dart';
-import '../../../../core/data/model.dart';
 import '../../../../core/widgets/custom_text_form_field_widget.dart';
-import '../../../../core/widgets/default_material_button.dart';
 import '../../../../core/widgets/pick_color.dart';
-import '../../../home_note/logic/home_note_cubit.dart';
 
 class DefaultBottomSheetAddNote extends StatelessWidget {
   const DefaultBottomSheetAddNote({super.key});
@@ -77,48 +73,7 @@ class DefaultBottomSheetAddNote extends StatelessWidget {
                     return PickColorItems(cubit: cubit,);
                   },
                 ),
-                BlocConsumer<AddNoteCubit, AddNoteState>(
-                  listener: (context, state) {
-                    if (state is AddNoteFailed) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        AppNotify.snackBar(
-                          widget: Text(state.error),
-                          context: context,
-                        ),
-                      );
-                    }
-                    if (state is AddNoteSuccess) {
-                      BlocProvider.of<HomeNoteCubit>(context).geDataNote();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        AppNotify.snackBar(
-                          widget: const Text("Add Success"),
-                          context: context,
-                        ),
-                      );
-                      AppNavigator.navigatorPop(context: context);
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is AddNoteLoading) {
-                      return AppNotify.circularProgress();
-                    }
-                    return DefaultMaterialButton(
-                      text: "Add",
-                      onPressed: () {
-                        NoteModel addNoteModel = NoteModel(
-                          title: cubit.titleController.text,
-                          desc: cubit.descController.text,
-                          createdAt: DateTime.now(),
-                          color: cubit.selectedColor.toARGB32(),
-                        );
-                        if (cubit.keyForm.currentState!.validate()) {
-                          cubit.keyForm.currentState!.save();
-                          cubit.add(notes: addNoteModel);
-                        }
-                      },
-                    );
-                  },
-                ),
+               BlocConsumerAddNote(cubit: cubit),
               ],
             ),
           ),

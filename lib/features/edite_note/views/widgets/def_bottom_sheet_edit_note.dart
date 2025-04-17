@@ -3,14 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_proj/core/widgets/pick_color.dart';
 import 'package:notes_proj/features/edite_note/logic/edite_note_cubit.dart';
 import 'package:notes_proj/features/edite_note/logic/edite_note_state.dart';
-
 import '../../../../core/constant/app_constant.dart';
 import '../../../../core/data/model.dart';
-import '../../../../core/helper/my_navigator_app.dart';
-import '../../../../core/helper/notify_app.dart';
 import '../../../../core/widgets/custom_text_form_field_widget.dart';
-import '../../../../core/widgets/default_material_button.dart';
-import '../../../home_note/logic/home_note_cubit.dart';
+import 'custom_bloc_consumer_edite.dart';
 
 class DefaultBottomSheetEditeNote extends StatelessWidget {
   const DefaultBottomSheetEditeNote({
@@ -65,40 +61,7 @@ class DefaultBottomSheetEditeNote extends StatelessWidget {
                 return PickColorItems(cubit: cubit);
               },
             ),
-            BlocConsumer<EditeNoteCubit, EditeNoteState>(
-              listener: (context, state) {
-                if (state is EditeNoteFailed) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    AppNotify.snackBar(
-                      widget: Text(state.error),
-                      context: context,
-                    ),
-                  );
-                }
-                if (state is EditeNoteSuccess) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    AppNotify.snackBar(
-                      widget: const Text("Edite Success"),
-                      context: context,
-                    ),
-                  );
-                  AppNavigator.navigatorPop(context: context);
-                  BlocProvider.of<HomeNoteCubit>(context).geDataNote();
-                }
-              },
-              builder: (context, state) {
-                if (state is EditeNoteLoading) {
-                  return AppNotify.circularProgress();
-                }
-                return DefaultMaterialButton(
-                  text: "Save",
-                  onPressed: () {
-                    cubit.editeNote(notes: note, index: index);
-                    note.save();
-                  },
-                );
-              },
-            ),
+            BlocConsumerEditeNote(cubit: cubit,index: index,note: note,),
           ],
         ),
       ),
